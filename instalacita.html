@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Instalaciones - Jardin Botanico</title>
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* Header */
+        .header {
+            background-color: #095c2b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 150px;
+        }
+
+        .logo-text {
+            color: white;
+            margin-left: 15px;
+        }
+
+        .logo-text h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo-text p {
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        /* Barra de navegación */
+        .navbar {
+            background-color: #0b7936;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-container a {
+            color: white;
+            padding: 15px 25px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .nav-container a:hover {
+            background-color: #064220;
+        }
+
+        /* Cabecera con Mapa Resumen */
+        .map-header-summary {
+            background-image: url('imagenes/mapa_resumen_jardin.jpg'); /* Reemplaza con la imagen del mapa resumen */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .map-header-summary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(9, 92, 43, 0.7); /* Overlay oscuro para mejor legibilidad del texto */
+        }
+
+        .map-header-summary h2 {
+            position: relative;
+            z-index: 1;
+            font-size: 36px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .map-header-summary p {
+            position: relative;
+            z-index: 1;
+            font-size: 18px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Contenedor de Mapa Detallado */
+        .detailed-map-container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .detailed-map-container h3 {
+            color: #0b7936;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .detailed-map-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sección de instalaciones */
+        .installation-section {
+            margin-bottom: 30px;
+        }
+
+        .installation-container {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .installation-info {
+            flex: 2;
+            margin-right: 20px;
+        }
+
+        .installation-info h3 {
+            color: #0b7936;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .installation-info p {
+            line-height: 1.8;
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .installation-list {
+            list-style: disc;
+            margin-left: 20px;
+        }
+
+        .installation-list li {
+            margin-bottom: 5px;
+        }
+
+        .installation-image-container {
+            flex: 1;
+            max-width: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+
+        .installation-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: filter 0.3s;
+        }
+
+        .installation-image-container:hover img {
+            filter: brightness(1.1) sepia(20%) hue-rotate(100deg) saturate(150%);
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #033918;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        footer p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo {
+                margin-bottom: 10px;
+            }
+
+            .nav-container {
+                flex-wrap: wrap;
+            }
+
+            .nav-container a {
+                padding: 10px 15px;
+                margin: 5px;
+            }
+
+            .map-header-summary {
+    background-color: #095c2b; 
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+    position: relative;
+}
+
+.map-header-summary h2 {
+    position: relative;
+    z-index: 1;
+    font-size: 36px;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.map-header-summary p {
+    position: relative;
+    z-index: 1;
+    font-size: 18px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+            .detailed-map-container {
+                margin: 15px;
+                padding: 10px;
+            }
+
+            .detailed-map-container h3 {
+                font-size: 18px;
+            }
+
+            .installation-container {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+
+            .installation-info {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .installation-info h3 {
+                font-size: 20px;
+            }
+
+            .installation-info p {
+                font-size: 14px;
+            }
+
+            .installation-image-container {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="imagenes/logo.webp" alt="Logo Jardin Botanico">
+            <div class="logo-text">
+                <h1>JARDÍN BOTANICO NACIONAL</h1>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-container">
+                <a href="index.html">Inicio</a>
+                <a href="histrieta.html">Acerca de</a>
+                <a href="servicia.html">Servicios</a>
+                <a href="contacti.html">Contacto</a>
+                <a href="instalacita.html">Instalaciones</a>
+        </div>
+    </nav>
+
+    <section class="map-header-summary">
+        <h2>Explora Nuestro Jardín</h2>
+        <p>Una vista general de nuestras maravillosas instalaciones.</p>
+    </section>
+
+    <div class="detailed-map-container">
+        <h3>Mapa Detallado del Jardín</h3>
+        <img src="imagenes/Mapa.jpg" alt="Mapa Detallado del Jardín Botánico">
+    </div>
+
+    <div class="container">
+        <section class="installation-section">
+            <div class="installation-container">
+                <div class="installation-info">
+                    <h3>Entrada Principal y Centro de Visitantes</h3>
+                    <p>El punto de inicio de tu recorrido. Aquí encontrarás información general, venta de entradas y podrás solicitar visitas guiadas.</p>
+                </div>
+                <div class="installation-image-container">
+                    <img src="imagenes/entrada.jpg" alt="Entrada Principal">
+                </div>
+            </div>
+        </section>
+
+        <section class="installation-section">
+            <div class="installation-container">
+                <div class="installation-info">
+                    <h3>Jardín de Cactus y Suculentas</h3>
+                    <p>Una impresionante colección de plantas adaptadas a climas áridos, con formas y tamaños sorprendentes.</p>
+                </div>
+                <div class="installation-image-container">
+                    <img src="imagenes/botanica.jpg " alt="Jardín de Cactus">
+                </div>
+            </div>
+        </section>
+
+        <section class="installation-section">
+            <div class="installation-container">
+                <div class="installation-info">
+                    <h3>Invernadero de Orquídeas</h3>
+                    <p>Un espacio dedicado a la exhibición de la belleza y diversidad de las orquídeas, con especies locales y exóticas.</p>
+                </div>
+                <div class="installation-image-container">
+                    <img src="imagenes/orquideas.jpg" alt="Invernadero de Orquídeas">
+                </div>
+            </div>
+        </section>
+
+        <section class="installation-section">
+            <div class="installation-container">
+                <div class="installation-info">
+                    <h3>Herbario Nacional</h3>
+                    <p>Un centro de investigación donde se conservan y estudian miles de especímenes de plantas, fundamental para la botánica y la conservación.</p>
+                </div>
+                <div class="installation-image-container">
+                    <img src="imagenes/herbario.jpg" alt="Herbario Nacional">
+                </div>
+            </div>
+        </section>
+
+        <section class="installation-section">
+            <div class="installation-container">
+                <div class="installation-info">
+                    <h3>Mariposario</h3>
+                    <p>Un espacio encantador donde podrás observar diversas especies de mariposas volando libremente en un ambiente controlado.</p>
+                </div>
+                <div class="installation-image-container">
+                    <img src="imagenes/mariposario.jpg" alt="Mariposario">
+                </div>
+            </div>
+        </section>
+
+        <section class="installation-section">
+            <div class="installation-container">
+                <div class="installation-info">
+                    <h3>Jardín Japonés</h3>
+                    <p>Un oasis de tranquilidad diseñado siguiendo los principios de la jardinería japonesa, ideal para la meditación y el descanso.</p>
+                </div>
+                <div class="installation-image-container">
+                    <img src="imagenes/jardin japones.jpg" alt="Jardín Japonés">
+                </div>
+            </div>
+
+        <section class="installation-section">
+            <div class="installation-container">
+                <div class="installation-info">
+                    <h3>Cafetería y Tienda de Souvenirs</h3>
+                    <p>Un lugar para descansar, disfrutar de una bebida o un refrigerio, y adquirir recuerdos de tu visita.</p>
+                </div>
+                <div class="installation-image-container">
+                    <img src="imagenes/cafeteria.jpg" alt="Cafetería y Tienda">
+                </div>
+            </div>
+        </section>
+
+        <section class="installation-section">
+            <div class="installation-container">
+                <div class="installation-info">
+                    <h3>Baños y Áreas de Descanso</h3>
+                    <p>Servicios básicos distribuidos estratégicamente para la comodidad de los visitantes.</p>
+                </div>
+                <div class="installation-image-container">
+                    <img src="imagenes/area de descanso.jpg" alt="Área de Descanso">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2025 Jardín Botánico Nacional "Dr. Rafael María Moscoso". Todos los derechos reservados.</p>
+        <p>Proyecto final 6to grado - Andrimar Ferreras y Kevin Lorenzo
+            <p>Instituto Unión Panamericana 2025</p>
+            <p>Última fecha de actualización: 7 de mayo de 2025</p>
+            <p> Fecha de creación: 3 de febrero de 2025</p>
+    </footer>
+</body>
+</html>

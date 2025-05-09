@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historia del Jardín Botánico - Jardin Botanico</title>
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* Header */
+        .header {
+            background-color: #095c2b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 150px;
+        }
+
+        .logo-text {
+            color: white;
+            margin-left: 15px;
+        }
+
+        .logo-text h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo-text p {
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        /* Barra de navegación */
+        .navbar {
+            background-color: #0b7936;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-container a {
+            color: white;
+            padding: 15px 25px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .nav-container a:hover {
+            background-color: #064220;
+        }
+
+        /* Cabecera de la página (Imagen de fondo) */
+        .page-header {
+            background-image: url('imagenes/historia_header.jpg'); /* AQUÍ PUEDES CAMBIAR LA IMAGEN DE FONDO */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 120px 20px;
+            position: relative;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(9, 92, 43, 0.7); /* Overlay verde para mantener coherencia */
+            z-index: 1;
+        }
+
+        .page-header h2 {
+            position: relative;
+            z-index: 1;
+            font-size: 48px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .page-header p {
+            position: relative;
+            z-index: 1;
+            font-size: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Contenedor principal */
+        .history-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 30px; /* Espacio entre la columna principal y la barra lateral */
+        }
+
+        /* Columna principal (Historia y Línea de Tiempo) */
+        .history-main {
+            flex: 2; /* Ocupa la mayor parte del espacio */
+        }
+
+        /* Nueva sección de historia con imagen de fondo */
+        .history-section {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .history-section.with-bg {
+            background-image: url(imagenes/aja.jpg); /* AQUÍ PUEDES CAMBIAR LA IMAGEN DE FONDO */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: white;
+        }
+
+        .history-section.with-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(9, 92, 43, 0.8); /* Overlay verde (color del header) para mantener la estética */
+            border-radius: 8px;
+            z-index: 1;
+        }
+
+        .history-section.with-bg h2,
+        .history-section.with-bg p {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+
+        .history-section.with-bg h2 {
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .history-section h2 {
+            color: #0b7936;
+            font-size: 28px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .history-section p {
+            line-height: 1.8;
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        /* Línea de Tiempo */
+        .timeline {
+            list-style: none;
+            padding: 0;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            width: 2px;
+            background-color: #0b7936;
+        }
+
+        .timeline-item {
+            margin-bottom: 20px;
+            padding-left: 40px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #0b7936;
+            border: 2px solid #fff;
+        }
+
+        .timeline-item h4 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .timeline-item p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* Barra lateral (Noticias e Imágenes) */
+        .history-sidebar {
+            flex: 1; /* Ocupa un espacio menor */
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Espacio entre los contenedores de la barra lateral */
+        }
+
+        .sidebar-item {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+        }
+
+        .sidebar-item h3 {
+            color: #0b7936;
+            font-size: 20px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        .sidebar-item p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .sidebar-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #033918;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        footer p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo {
+                margin-bottom: 10px;
+            }
+
+            .nav-container {
+                flex-wrap: wrap;
+            }
+
+            .nav-container a {
+                padding: 10px 15px;
+                margin: 5px;
+            }
+
+            .page-header {
+                padding: 80px 20px;
+            }
+
+            .page-header h2 {
+                font-size: 36px;
+            }
+
+            .page-header p {
+                font-size: 18px;
+            }
+
+            .history-container {
+                flex-direction: column; /* Apila la columna principal y la barra lateral */
+                margin: 20px;
+                padding: 15px;
+                gap: 20px;
+            }
+
+            .history-sidebar {
+                flex-direction: row; /* Muestra noticias e imágenes en fila en pantallas pequeñas */
+                overflow-x: auto; /* Permite desplazamiento horizontal si hay muchas noticias */
+                gap: 15px;
+                padding-bottom: 15px;
+            }
+
+            .sidebar-item {
+                min-width: 200px; /* Evita que los elementos se encojan demasiado */
+            }
+
+            .history-section h2 {
+                font-size: 24px;
+            }
+
+            .timeline::before {
+                left: 15px;
+            }
+
+            .timeline-item {
+                padding-left: 30px;
+            }
+
+            .timeline-item::before {
+                left: 10px;
+            }
+
+            .sidebar-item h3 {
+                font-size: 18px;
+            }
+
+            .sidebar-item p {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="imagenes/logo.webp" alt="Logo Jardin Botanico">
+            <div class="logo-text">
+                <h1>JARDÍN BOTANICO NACIONAL</h1>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html">Inicio</a>
+            <a href="histrieta.html">Acerca de</a>
+            <a href="servicia.html">Servicios</a>
+            <a href="contacti.html">Contacto</a>
+            <a href="instalacita.html">Instalaciones</a>
+                        
+        </div>
+    </nav>
+
+    
+    <section class="page-header">
+        <h2>Nuestra Historia</h2>
+        <p>Un recorrido por los momentos que han dado forma a nuestro jardín botánico.</p>
+    </section>
+    
+
+
+    <div class="history-container">
+        <main class="history-main">
+           
+            <section class="history-section with-bg">
+                <h2>Nuestra Historia</h2>
+                <p>El Jardín Botánico Nacional "Dr. Rafael María Moscoso", el más grande del Caribe con una extensión de aproximadamente dos millones de metros cuadrados, no surgió de la noche a la mañana. Su historia es un testimonio de la visión de científicos y autoridades dominicanas preocupadas por la conservación del patrimonio natural del país.
+                </p>
+                <p> Antecedentes y Motivación:
+                    
+                    A mediados del siglo XX, la República Dominicana experimentaba un desarrollo que, si bien traía progreso, también ejercía presión sobre sus ecosistemas y su rica biodiversidad. La necesidad de un espacio dedicado al estudio y la protección de la flora nativa se hizo cada vez más evidente. Científicos y académicos dominicanos, conscientes de la importancia de preservar este legado natural único, comenzaron a abogar por la creación de un jardín botánico nacional.
+                </p>
+                <p>El Impulso Decisivo y la Ley de Creación:
+                    
+                    Fue durante el gobierno del Dr. Joaquín Balaguer que esta visión comenzó a materializarse. Sensible a la importancia de la conservación y el conocimiento científico, su administración impulsó la creación del jardín botánico a través de la Ley Núm. 456 del 12 de octubre de 1976. Esta ley no solo formalizó la existencia del jardín, sino que también estableció sus objetivos fundamentales:
+                    
+                    Estudio de la flora dominicana: Investigar y documentar la diversidad de plantas presentes en el territorio nacional.
+                    Conservación: Implementar estrategias para proteger especies amenazadas y sus hábitats.
+                    Manejo sostenible: Promover el uso responsable de los recursos vegetales.
+                    Educación ambiental: Concientizar a la población sobre la importancia de la flora y la conservación.
+                    Recreación: Ofrecer un espacio para el disfrute y el esparcimiento en contacto con la naturaleza.</p>
+            </section>
+            
+            <section class="history-section">
+                <h2>Desarrollo y Consolidación</h2>
+                <p>Diseño y Construcción:
+
+                    Una vez promulgada la ley, se procedió al diseño y la construcción del jardín. El renombrado arquitecto dominicano Benjamín Paiewonsky fue el encargado de plasmar en un plano la visión de un espacio funcional, educativo y estéticamente agradable. Su diseño contempló la creación de diversas colecciones botánicas que representaran los diferentes ecosistemas del país, así como áreas para la investigación, la educación y el esparcimiento.
+                    
+                    La construcción del jardín se llevó a cabo bajo la supervisión del ingeniero Joaquín Ruiz, quien tuvo la responsabilidad de convertir los planos en una realidad tangible. El proceso de construcción, iniciado en marzo de 1972, culminó con la inauguración oficial el 15 de agosto de 1976.
+                </p>
+                    
+                <p>Un Nombre en Honor a un Pionero:
+                
+                    Poco después de su inauguración, mediante el Decreto Núm. 2271, el jardín fue bautizado con el nombre del Dr. Rafael María Moscoso. Este fue un merecido homenaje a un hombre considerado el primer botánico dominicano de trascendencia. El Dr. Moscoso dedicó gran parte de su vida al estudio de la flora de la isla La Española, culminando su labor con la publicación del "Catalogus Florae Domingensis", una obra fundamental que catalogó exhaustivamente las plantas de la isla. Su legado sentó las bases para la botánica dominicana, y nombrar el jardín en su honor fue un acto de reconocimiento a su invaluable contribución.
+                </p>
+                   
+                <p>Desarrollo y Administración:
+                    
+                    A lo largo de su historia, el Jardín Botánico Nacional ha pasado por diferentes etapas administrativas. Inicialmente, fue dirigido directamente por el Estado. Sin embargo, en un esfuerzo por promover una gestión más ágil y enfocada en la conservación, se promulgó la Ley Núm. 921, que puso el jardín bajo la administración y dirección de la Fundación Pro-Flora Dominicana, Inc., una entidad sin fines de lucro. Este contrato de administración se renovó posteriormente, aunque luego el jardín volvió a ser dirigido por un director designado por el Poder Ejecutivo.
+                </p>
+                   
+                <p>Legado y Presente:
+                    
+                    Hoy en día, el Jardín Botánico Nacional "Dr. Rafael María Moscoso" es una institución de gran importancia para la República Dominicana y el Caribe. No solo alberga una impresionante colección de plantas nativas y exóticas, sino que también desempeña un papel crucial en la investigación científica,
+                    la conservación de especies amenazadas y la educación ambiental. Es un espacio de aprendizaje, recreación y un símbolo del compromiso del país con la protección de su invaluable patrimonio natural. Sus diversas secciones, como el herbario, los jardines temáticos y la reserva natural,
+                    ofrecen a visitantes e investigadores una visión profunda de la riqueza y la fragilidad del mundo vegetal.
+                </p>
+            </section>
+
+            <section class="history-section">
+                <h2>Línea de Tiempo</h2>
+                <ul class="timeline">
+                    <li class="timeline-item">
+                        <h4>[1960] - Fundación</h4>
+                        <p>Surge la conciencia y la necesidad entre científicos y autoridades dominicanas de crear un espacio dedicado al estudio y la conservación de la flora del país. Se inician las gestiones para su creación.
+                        </p>
+                    </li>
+                    <li class="timeline-item">
+                        <h4>[1972]</h4>
+                        <p>Se inician formalmente los trabajos de construcción del Jardín Botánico Nacional.
+                        </p>
+                    </li>
+                    <li class="timeline-item">
+                        <h4>12 de octubre de 1976</h4>
+                        <p>Se promulga la Ley Núm. 456, que crea oficialmente el Jardín Botánico Nacional. Esta ley establece sus objetivos fundamentales de estudio, conservación, manejo, educación y recreación.
+                        </p>
+                    </li>
+                    <li class="timeline-item">
+                        <h4>15 de agosto de 1976</h4>
+                        <p> El Jardín Botánico Nacional es inaugurado oficialmente.</p>
+                    </li>
+                    <li class="timeline-item">
+                        <h4>1976</h4>
+                        <p>Mediante el Decreto Núm. 2271, el jardín es nombrado "Dr. Rafael María Moscoso" en honor al primer botánico dominicano en catalogar exhaustivamente la flora de la isla La Española.
+                        </p>
+                        <p>Promulgación de la Ley Núm. 921: Esta ley establece la administración y dirección del jardín bajo la Fundación Pro-Flora Dominicana, Inc., una entidad sin fines de lucro, buscando una gestión más enfocada en la conservación.
+                        </p>
+                    </li>
+                    <li class="timeline-item">
+                        <h4>Años posteriores a su inauguración</h4>
+                        <p>Se desarrollan y organizan las diferentes colecciones botánicas, representando los diversos ecosistemas de la República Dominicana. Se establecen el herbario y otras instalaciones de investigación y educación.
+                        </p>
+                    </li>
+                    <li class="timeline-item">
+                        <h4>actualmente</h4>
+                        <p> El Jardín Botánico Nacional continúa siendo una institución clave para la investigación botánica, la conservación de especies endémicas y amenazadas, la educación ambiental y un importante espacio de recreación y conexión con la naturaleza para los dominicanos y visitantes. Se realizan esfuerzos continuos para mejorar sus instalaciones, ampliar sus colecciones y fortalecer sus programas educativos y de conservación.</p>
+                    </li>
+                </ul>
+            </section>
+        </main>
+
+        <aside class="history-sidebar">
+            <div class="sidebar-item">
+                <h3>Noticias Recientes</h3>
+                <h4>[Fecha] - Nuevo Sendero Inaugurado</h4>
+                <p>Hemos inaugurado un nuevo sendero ecológico que permite a los visitantes explorar una sección previamente inaccesible del jardín. ¡Ven a descubrirlo!</p>
+                <img src="imagenes/sender.jpg" alt="Nuevo Sendero">
+            </div>
+
+            <div class="sidebar-item">
+                <h3>orquideas</h3>
+                <img src="imagenes/planta exotica.jpg" alt="Planta Exótica">
+                <p class="caption">ven a ver nuestras hermosas orquideas, aqui te esperamos</p>
+            </div>
+
+            <div class="sidebar-item">
+                <h3>Próximos Eventos</h3>
+                <h4>se realizará los días 17, 18, 19 y 20 de octubre - Festival Nacional de Plantas y Flores</h4>
+                <p>El festival ofrecerá una variedad de plantas y flores, incluyendo orquídeas y flores de pascua. También habrá cursos y talleres educativos sobre el cuidado de plantas nativas y endémicas, así como presentaciones artísticas y culturales. ¡No te lo pierdas!</p>
+            </div>
+
+            <div class="sidebar-item">
+                <h3>vistas del jardin japones</h3>
+                <img src="imagenes/imagen3.jpg" alt="Paisaje del Jardín">
+                <p class="caption">Una vista panorámica de nuestro hermoso lago ubicado en el jardin japones.</p>
+            </div>
+            <div class="sidebar-item">
+                <h3>Galería de Imágenes</h3>
+                <img src="imagenes/aja.jpg" alt="Paisaje del Jardín">
+                <p class="caption">Una vista panorámica del jardín al atardecer.</p>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <p>© 2025 Jardín Botánico Nacional "Dr. Rafael María Moscoso". Todos los derechos reservados.</p>
+        <p>Proyecto final 6to grado - Andrimar Ferreras y Kevin Lorenzo
+            <p>Instituto Unión Panamericana 2025</p>
+            <p>Última fecha de actualización: 7 de mayo de 2025</p>
+            <p> Fecha de creación: 3 de febrero de 2025</p>
+    </footer>
+</body>
+</html>

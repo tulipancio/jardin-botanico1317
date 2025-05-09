@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jardín Botánico Nacional</title>
+    <style>
+    
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        
+        
+        .header {
+            background-color: #095c2b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 150px;
+        }
+        
+        .logo-text {
+            color: white;
+            margin-left: 15px;
+        }
+        
+        .logo-text h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .logo-text p {
+            font-size: 14px;
+            font-style: italic;
+        }
+        
+        /* Barra de navegación */
+        .navbar {
+            background-color: #0b7936;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .nav-container a {
+            color: white;
+            padding: 15px 25px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-container a:hover {
+            background-color: #064220;
+        }
+        
+        /* Banner principal con carrusel */
+        .main-banner {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+            height: 500px;
+        }
+        
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .carousel {
+            display: flex;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .carousel-item {
+            min-width: 100%;
+            position: relative;
+        }
+        
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .overlay h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .overlay p {
+            font-size: 20px;
+            max-width: 800px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .btn-visit {
+            background-color: #0b7936;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s, transform 0.2s;
+            border: 2px solid white;
+        }
+        
+        .btn-visit:hover {
+            background-color: #095c2b;
+            transform: scale(1.05);
+        }
+        
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: rgba(11, 121, 54, 0.7);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10;
+            border: none;
+            transition: background-color 0.3s;
+        }
+        
+        .carousel-arrow:hover {
+            background-color: rgba(11, 121, 54, 0.9);
+        }
+        
+        .carousel-arrow.prev {
+            left: 20px;
+        }
+        
+        .carousel-arrow.next {
+            right: 20px;
+        }
+        
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .indicator.active {
+            background-color: white;
+        }
+        
+        /* Sección de características */
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 50px 20px;
+            background-color: white;
+        }
+        
+        .feature-box {
+            width: 300px;
+            margin: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .feature-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .feature-box:hover .feature-img img {
+            transform: scale(1.1);
+        }
+        
+        .feature-content {
+            padding: 20px;
+        }
+        
+        .feature-content h3 {
+            color: #095c2b;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .feature-content p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        /* Sección acerca de */
+        .about-section {
+            background-color: #f5f5f5;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .section-title {
+            position: relative;
+            font-size: 32px;
+            color: #095c2b;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: #0b7936;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            text-align: left;
+            padding: 20px;
+        }
+        
+        .about-text p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #444;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Sección de estadísticas */
+        .stats-section {
+            background-color: #095c2b;
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .stat-item {
+            padding: 20px;
+            margin: 15px;
+            min-width: 200px;
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-text {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        /* Pie de página */
+        footer {
+            background-color: #033918;
+            color: white;
+            padding: 40px 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin: 15px;
+        }
+        
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background-color: #0b7936;
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-links a {
+            display: block;
+            color: #ddd;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            margin-left: 5px;
+        }
+        
+        .footer-contact p {
+            margin-bottom: 10px;
+            color: #ddd;
+        }
+        
+        .social-icons {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+            color: white;
+        }
+        
+        .social-icons a:hover {
+            background-color: #0b7936;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+        }
+        
+        /* Responsividad */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .nav-container {
+                flex-wrap: wrap;
+            }
+            
+            .nav-container a {
+                padding: 10px 15px;
+            }
+            
+            .overlay h2 {
+                font-size: 32px;
+            }
+            
+            .overlay p {
+                font-size: 16px;
+            }
+            
+            .main-banner {
+                height: 400px;
+            }
+        }
+        .greeting-section {
+    background-color: #f9f9f9;
+    padding: 60px 20px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.greeting-section h2 {
+    color: #095c2b;
+    font-size: 32px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.greeting-section h2::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 3px;
+    background-color: #0b7936;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.greeting-section p {
+    max-width: 800px;
+    margin: 0 auto 30px;
+    color: #444;
+    line-height: 1.6;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+  /* NUEVA SECCIÓN: AUTORES */
+  .authors-section {
+            background-color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .authors-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .author-card {
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 350px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .author-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .author-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            border: 4px solid #0b7936;
+        }
+
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-name {
+            color: #095c2b;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .author-role {
+            color: #0b7936;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .author-info {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .author-contact {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .author-contact a {
+            color: #0b7936;
+            transition: color 0.3s;
+        }
+
+        .author-contact a:hover {
+            color: #064220;
+        }
+
+        /* NUEVA SECCIÓN: PROPÓSITO DEL PROYECTO */
+        .purpose-section {
+            background-color: #f5f5f5;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .purpose-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+
+        .purpose-icon {
+            font-size: 48px;
+            color: #0b7936;
+            margin-bottom: 20px;
+        }
+
+        .purpose-title {
+            color: #095c2b;
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+
+        .purpose-text {
+            color: #444;
+            line-height: 1.8;
+            text-align: justify;
+            margin-bottom: 30px;
+        }
+
+        .purpose-goals {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .goal-item {
+            background-color: #f5f5f5;
+            border-left: 4px solid #0b7936;
+            padding: 15px;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+            text-align: left;
+        }
+
+        .goal-item h4 {
+            color: #095c2b;
+            margin-bottom: 8px;
+        }
+
+        .goal-item p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Pie de página */
+        footer {
+            background-color: #033918;
+            color: white;
+            padding: 40px 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin: 15px;
+        }
+
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background-color: #0b7936;
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links a {
+            display: block;
+            color: #ddd;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            margin-left: 5px;
+        }
+
+        .footer-contact p {
+            margin-bottom: 10px;
+            color: #ddd;
+        }
+
+        .social-icons {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+            color: white;
+        }
+
+        .social-icons a:hover {
+            background-color: #0b7936;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-container {
+                flex-wrap: wrap;
+            }
+
+            .nav-container a {
+                padding: 10px 15px;
+            }
+
+            .overlay h2 {
+                font-size: 32px;
+            }
+
+            .overlay p {
+                font-size: 16px;
+            }
+
+            .main-banner {
+                height: 400px;
+            }
+        }
+
+/* For mobile responsiveness */
+@media (max-width: 768px) {
+    .greeting-section {
+        padding: 40px 15px;
+    }
+    
+    .greeting-section h2 {
+        font-size: 28px;
+    }
+}
+    </style>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="logo">
+            <img src="imagenes/logo.webp" alt="Logo JBN">
+            <div class="logo-text">
+                <h1>JARDÍN BOTÁNICO NACIONAL</h1>
+            </div>
+        </div>
+    </header>
+
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-container">
+                <a href="ejem.html">Inicio</a>
+                <a href="histrieta.html">Acerca de</a>
+                <a href="servicia.html">Servicios</a>
+                <a href="contacti.html">Contacto</a>
+                <a href="instalacita.html">Instalaciones</a>
+        </div>
+    </nav>
+
+    
+    <section class="main-banner">
+        <div class="carousel-container">
+            <button class="carousel-arrow prev">&lt;</button>
+            
+            <div class="carousel">
+                <div class="carousel-item">
+                    <img src="imagenes/reloj-en-jardin-botanico-nacional.webp" alt="Jardín Botánico">
+                    <div class="overlay">
+                        <h2>Jardín Botánico Nacional</h2>
+                        <p>Un paraíso natural para disfrutar de la biodiversidad y la riqueza botánica de nuestro país</p>
+                        <a href="#" class="btn-visit">Planifica tu visita</a>
+                    </div>
+                </div>
+                
+                <div class="carousel-item">
+                    <img src="imagenes/botanica.jpg" alt="Exposiciones Botánicas">
+                    <div class="overlay">
+                        <h2>Colecciones Botánicas</h2>
+                        <p>Descubre nuestras colecciones de plantas nativas y exóticas en exhibición permanente</p>
+                        <a href="#" class="btn-visit">Explora más</a>
+                    </div>
+                </div>
+                
+                <div class="carousel-item">
+                    <img src="imagenes/educacion.jpg" alt="Educación Ambiental">
+                    <div class="overlay">
+                        <h2>Educación Ambiental</h2>
+                        <p>Programas educativos para todas las edades sobre botánica y conservación ambiental</p>
+                        <a href="#" class="btn-visit">Aprender más</a>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="carousel-arrow next">&gt;</button>
+            
+            <div class="carousel-indicators">
+                <span class="indicator active" data-index="0"></span>
+                <span class="indicator" data-index="1"></span>
+                <span class="indicator" data-index="2"></span>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="features">
+        <div class="feature-box">
+            <div class="feature-img">
+                <img src="imagenes/imagen2.jpg" alt="Mariposario">
+            </div>
+            <div class="feature-content">
+                <h3>Mariposario</h3>
+                <p>Vive una experiencia única en nuestro mariposario, donde podrás observar especies de mariposas nativas en su hábitat natural.</p>
+            </div>
+        </div>
+        
+        <div class="feature-box">
+            <div class="feature-img">
+                <img src="imagenes/imagen5.jpg" alt="Jardín Japonés">
+            </div>
+            <div class="feature-content">
+                <h3>Jardín Japonés</h3>
+                <p>Un espacio de paz y tranquilidad diseñado siguiendo los principios tradicionales de los jardines japoneses.</p>
+            </div>
+        </div>
+        
+        <div class="feature-box">
+            <div class="feature-img">
+                <img src="imagenes/palmas.jpg" alt="Colección de Palmas">
+            </div>
+            <div class="feature-content">
+                <h3>Colección de Palmas</h3>
+                <p>Exhibición permanente de diversas especies de palmas nativas y exóticas, mostrando su diversidad y belleza.</p>
+            </div>
+        </div>
+        
+        <div class="feature-box">
+            <div class="feature-img">
+                <img src="imagenes/sender.jpg" alt="Senderos educativo taino">
+            </div>
+            <div class="feature-content">
+                <h3>Senderos educativo taino</h3>
+                <p>Rutas interpretativas donde podrás conocer nuestra flora y fauna mientras disfrutas de un recorrido en plena naturaleza.</p>
+            </div>
+        </div>
+        <div class="feature-box">
+            <div class="feature-img">
+                <img src="imagenes/rosal.jpg" alt="Senderos Ecológicos2">
+            </div>
+            <div class="feature-content">
+                <h3>Jardin de rosas</h3>
+                <p>Rutas interpretativas donde podrás conocer nuestra flora y fauna mientras disfrutas de un recorrido en plena naturaleza.</p>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="about-section">
+        <h2 class="section-title">Quiénes Somos</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>El Jardín Botánico Nacional es una institución dedicada a la conservación, investigación y exhibición de la diversidad vegetal de nuestro país y el mundo. Con más de 2 millones de metros cuadrados, nuestro jardín alberga colecciones representativas de diferentes ecosistemas.</p>
+                <p>Nuestra misión es contribuir a la preservación de la biodiversidad a través de la investigación científica, la educación ambiental y la concientización sobre la importancia de las plantas para la vida en nuestro planeta.</p>
+                <p>Somos un espacio abierto al público donde la ciencia, la recreación y la naturaleza se encuentran para ofrecer experiencias únicas y enriquecedoras.</p>
+            </div>
+            <div class="about-image">
+                <img src="imagenes/imagen3.jpg" alt="Vista del Jardín Botánico">
+            </div>
+        </div>
+            </div>
+            <section class="authors-section">
+                <h2 class="section-title">Autores</h2>
+                <div class="authors-container">
+                    <div class="author-card">
+                        <div class="author-image">
+                            <img src="imagenes/andri ft.jpg" alt="Andrimar Ferreras">
+                        </div>
+                        <h3 class="author-name">Andrimar Ferreras</h3>
+                        <p class="author-role">Desarrolladora Frontend Junior </p>
+                        <p class="author-info">Hola! Me alegra que hayas ingresado a nuestra página. 
+                            Mi nombre es Andrimar Ferreras, soy estudiante de programación de último grado de bachiller en el instituto tecnológico unión panamericana. CO-colabaradora de esta increíble página 
+                            </p>
+                        <div class="author-contact">
+                            <a href="#"><i class="fas fa-envelope"></i> andrimarferreras@gmail.com</a>
+                        </div>
+                        <p>Numero: #13</p>
+                    </div>
+        
+                    <div class="author-card">
+                        <div class="author-image">
+                            <img src="imagenes/kevin ft.jpg" alt="Kevin Lorenzo">
+                        </div>
+                        <h3 class="author-name">Kevin Lorenzo</h3>
+                        <p class="author-role">Desarrollador Backend Junior</p>
+                        <p class="author-info">Pasándola bien en nuestra página? 
+                            Me llamo Kevin Lorenzo, también estudiante de programación de último grado en el instituto tecnológico unión panamericana. CO-colabarador de este hermoso sitio web</p>
+                        <div class="author-contact">
+                            <a href="#"><i class="fas fa-envelope"></i> kevinlorenzo@gmail.com</a>
+                        </div>
+                        <p>Numero: #17</p>
+                    </div>
+                </div>
+            </section>
+        
+            <!-- NUEVA SECCIÓN: PROPÓSITO DEL PROYECTO -->
+            <section class="purpose-section">
+                <h2 class="section-title">Propósito del Proyecto</h2>
+                <div class="purpose-container">
+                    <div class="purpose-icon">🌱</div>
+                    <h3 class="purpose-title">Conectando la Naturaleza con la Tecnología</h3>
+                    <p class="purpose-text">Este proyecto web tiene como objetivo principal crear una plataforma digital moderna y accesible para el Jardín Botánico Nacional, permitiendo a los visitantes explorar virtualmente las instalaciones, obtener información actualizada sobre exposiciones y eventos, y facilitar la planificación de visitas presenciales.</p>
+                    <p class="purpose-text">Nuestra visión es utilizar la tecnología para promover la conservación de la biodiversidad y la educación ambiental, acercando el conocimiento botánico a un público más amplio a través de una experiencia digital inmersiva y educativa.</p>
+                    
+                    <div class="purpose-goals">
+                        <div class="goal-item">
+                            <h4>Objetivo</h4>
+                            <p>Aumentar la visibilidad del Jardín Botánico Nacional y sus actividades de conservación e investigación. Ampliar nuestros conocimientos de desarrollo web y asi tener mas experiencias a futuro</p>
+                        </div>
+                        <div class="goal-item">
+                            <h4>Educación</h4>
+                            <p>Ofrecer recursos educativos sobre botánica y medio ambiente accesibles para todos los públicos.</p>
+                        </div>
+                        <div class="goal-item">
+                            <h4>Experiencia</h4>
+                            <p>Mejorar la experiencia de los visitantes antes, durante y después de su visita al jardín.</p>
+                        </div>
+                    </div>
+                </div>
+    </section>
+    <section class="greeting-section">
+        <div class="">
+           <image src="imagenes/Planifica Tu visita.gif" width="100%" height="100%"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></image>
+    </section>
+        </div>
+    </section>
+
+    <section class="greeting-section">
+        <h2>Presentación del Proyecto</h2>
+        <p>Presentación del proyecto final, INSTECUPA 2025 - 6to Informática A, Andrimar Ferreras #13 Kevin Lorenzo #17</p>
+        <div class="video-container">
+            <iframe src="imagenes/video de silie.mp4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        
+    </section>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.querySelector('.carousel');
+            const items = document.querySelectorAll('.carousel-item');
+            const indicators = document.querySelectorAll('.indicator');
+            const prevBtn = document.querySelector('.carousel-arrow.prev');
+            const nextBtn = document.querySelector('.carousel-arrow.next');
+            const itemCount = items.length;
+            let currentIndex = 0;
+            let interval;
+            
+            // Función para actualizar el carrusel
+            function updateCarousel() {
+                carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                // Actualizar los indicadores
+                indicators.forEach((indicator, index) => {
+                    if (index === currentIndex) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+            }
+            
+            
+            function startAutoplay() {
+                interval = setInterval(() => {
+                    currentIndex = (currentIndex + 1) % itemCount;
+                    updateCarousel();
+                }, 5000); 
+            }
+            
+            
+            function stopAutoplay() {
+                clearInterval(interval);
+            }
+            
+            
+            prevBtn.addEventListener('click', function() {
+                stopAutoplay();
+                currentIndex = (currentIndex - 1 + itemCount) % itemCount;
+                updateCarousel();
+                startAutoplay();
+            });
+            
+            nextBtn.addEventListener('click', function() {
+                stopAutoplay();
+                currentIndex = (currentIndex + 1) % itemCount;
+                updateCarousel();
+                startAutoplay();
+            });
+            
+            
+            indicators.forEach(indicator => {
+                indicator.addEventListener('click', function() {
+                    stopAutoplay();
+                    currentIndex = parseInt(this.getAttribute('data-index'));
+                    updateCarousel();
+                    startAutoplay();
+                });
+            });
+            
+            // Iniciar autoplay al cargar la página
+            startAutoplay();
+            
+            // Detener autoplay cuando el mouse está sobre el carrusel
+            carousel.addEventListener('mouseenter', stopAutoplay);
+            carousel.addEventListener('mouseleave', startAutoplay);
+        });
+    </script>
+
+<footer>
+    <p>© 2025 Jardín Botánico Nacional "Dr. Rafael María Moscoso". Todos los derechos reservados.</p>
+    <p>Proyecto final 6to grado - Andrimar Ferreras y Kevin Lorenzo
+        <p>Instituto Unión Panamericana 2025</p>
+        <p>Última fecha de actualización: 7 de mayo de 2025</p>
+        <p> Fecha de creación: 3 de febrero de 2025</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,419 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jardin Botanico</title>
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* Header */
+        .header {
+            background-color: #095c2b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 150px;
+        }
+
+        .logo-text {
+            color: white;
+            margin-left: 15px;
+        }
+
+        .logo-text h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo-text p {
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        /* Barra de navegación */
+        .navbar {
+            background-color: #0b7936;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-container a {
+            color: white;
+            padding: 15px 25px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .nav-container a:hover {
+            background-color: #064220;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: url('imagenes/hero-default.jpg'); /* Reemplaza con tu imagen */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(9, 92, 43, 0.7);; /* Overlay oscuro */
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+        }
+
+        .btn-primary {
+            background-color: #0b7936;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s, transform 0.2s;
+            border: 2px solid white;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background-color: #095c2b;
+            transform: scale(1.05);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            border: 1px solid #eee;
+        }
+
+        .section h2 {
+            color: #095c2b;
+            font-size: 28px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: #0b7936;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section p, .section ul {
+            line-height: 1.8;
+            color: #555;
+            font-size: 16px;
+        }
+
+        .section ul {
+            list-style: disc;
+            margin-left: 20px;
+        }
+
+        /* Formulario de Reservación */
+        .reservation-form {
+            background-color: #f9f9f9;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 700px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .reservation-form h2 {
+            color: #095c2b;
+            font-size: 28px;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .reservation-form h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: #0b7936;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .reservation-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .reservation-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .reservation-form input[type="text"],
+        .reservation-form input[type="email"],
+        .reservation-form input[type="tel"],
+        .reservation-form input[type="date"],
+        .reservation-form input[type="number"],
+        .reservation-form select,
+        .reservation-form textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .reservation-form select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="currentColor" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position-x: 95%;
+            background-position-y: 50%;
+            background-size: 16px;
+        }
+
+        .reservation-form textarea {
+            resize: vertical;
+        }
+
+        .reservation-form button[type="submit"] {
+            background-color: #0b7936;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .reservation-form button[type="submit"]:hover {
+            background-color: #095c2b;
+            transform: scale(1.02);
+        }
+
+        .reservation-form .error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #033918;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo {
+                margin-bottom: 10px;
+            }
+
+            .nav-container {
+                flex-wrap: wrap;
+            }
+
+            .nav-container a {
+                padding: 10px 15px;
+                margin: 5px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .container {
+                margin: 20px;
+                padding: 15px;
+            }
+
+            .section {
+                padding: 20px;
+                margin-bottom: 30px;
+            }
+
+            .section h2 {
+                font-size: 24px;
+            }
+
+            .reservation-form {
+                padding: 20px;
+                margin: 20px;
+            }
+
+            .reservation-form h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="imagenes/logo.webp" alt="Logo Jardin Botanico">
+            <div class="logo-text">
+                <h1>JARDIN BOTANICO NACIONAL</h1>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html">Inicio</a>
+            <a href="histrieta.html">Acerca de</a>
+            <a href="servicia.html">Servicios</a>
+            <a href="contacti.html">Contacto</a>
+            <a href="instalacita.html">Instalaciones</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Descubre la Belleza Natural</h1>
+            <p>Explora la diversidad de la flora y fauna en un entorno tranquilo y educativo.</p>
+            <a href="#" class="btn-primary">Planifica tu Visita</a>
+        </div>
+    </section>
+
+
+        <section class="section">
+            <h2>Información para Visitantes</h2>
+            <p>Encuentra toda la información necesaria para planificar tu visita al jardín botánico.</p>
+            <p><strong>Horario:</strong> Martes a Domingo, 9:00 AM - 5:00 PM</p>
+            <p><strong>Teléfono:</strong> 809-385-2611 ext 248</p>
+            <p><strong>Dirección:</strong> Av. República de Colombia, esquina los próceres, sector Altos de Gala. D.N.</p>
+        </section>
+    </div>
+
+    <section class="reservation-form">
+      
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeOsHLHbawW4BHASAqbCKw4Ayx7l3zqCyESh7XYd2e_hwCTCw/viewform?embedded=true" width="640" height="1821" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>    <footer>
+
+    </section>
+    
+
+    <script>
+        const servicioSelect = document.getElementById('servicio');
+        const otroServicioDiv = document.getElementById('otro_servicio');
+        const otroServicioInput = document.getElementById('otro_servicio_detalle');
+
+        servicioSelect.addEventListener('change', function() {
+            if (this.value === 'otro') {
+                otroServicioDiv.style.display = 'block';
+                otroServicioInput.setAttribute('required', 'required');
+            } else {
+                otroServicioDiv.style.display = 'none';
+                otroServicioInput.removeAttribute('required');
+            }
+        });
+    </script>
+    <footer>
+        <p>© 2025 Jardín Botánico Nacional "Dr. Rafael María Moscoso". Todos los derechos reservados.</p>
+        <p>Proyecto final 6to grado - Andrimar Ferreras y Kevin Lorenzo
+            <p>Instituto Unión Panamericana 2025</p>
+            <p>Última fecha de actualización: 7 de mayo de 2025</p>
+            <p> Fecha de creación: 3 de febrero de 2025</p>
+    </footer>
+</body>
+</html>
